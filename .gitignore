@@ -1,0 +1,11 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+data/CVEFixes/*.csv
+data/CVEFixes/sample/cve_samples_*.csv
+# Virtual environments
+.venv
