@@ -1,0 +1,198 @@
+2026-06-01 00:42:44,647 | INFO | __main__ | Writing run logs to act_edit/output/general/act_separation.log
+2026-06-01 00:43:41,542 | INFO | __main__ | Writing run logs to act_edit/output/general/act_separation.log
+2026-06-01 00:43:41,542 | INFO | __main__ | Loading model: Qwen/Qwen3-1.7B
+2026-06-01 00:43:55,185 | INFO | __main__ | Model has 28 transformer layers
+2026-06-01 00:43:55,185 | INFO | __main__ | Hidden size: 2048
+2026-06-01 00:43:55,187 | INFO | __main__ | Extracting activations...
+2026-06-01 00:44:03,398 | INFO | __main__ | Activation tensor shape: (16, 29, 2048)
+2026-06-01 00:44:03,398 | INFO | __main__ | Running linear probe: 16 examples, 29 layers, hidden_size=2048
+2026-06-01 00:44:03,486 | INFO | __main__ | Layer  0: accuracy = 0.367
+2026-06-01 00:44:03,516 | INFO | __main__ | Layer  1: accuracy = 0.550
+2026-06-01 00:44:03,544 | INFO | __main__ | Layer  2: accuracy = 0.417
+2026-06-01 00:44:03,577 | INFO | __main__ | Layer  3: accuracy = 0.367
+2026-06-01 00:44:03,609 | INFO | __main__ | Layer  4: accuracy = 0.367
+2026-06-01 00:44:03,641 | INFO | __main__ | Layer  5: accuracy = 0.350
+2026-06-01 00:44:03,673 | INFO | __main__ | Layer  6: accuracy = 0.433
+2026-06-01 00:44:03,704 | INFO | __main__ | Layer  7: accuracy = 0.433
+2026-06-01 00:44:03,735 | INFO | __main__ | Layer  8: accuracy = 0.433
+2026-06-01 00:44:03,767 | INFO | __main__ | Layer  9: accuracy = 0.367
+2026-06-01 00:44:03,799 | INFO | __main__ | Layer 10: accuracy = 0.367
+2026-06-01 00:44:03,828 | INFO | __main__ | Layer 11: accuracy = 0.500
+2026-06-01 00:44:03,860 | INFO | __main__ | Layer 12: accuracy = 0.450
+2026-06-01 00:44:03,890 | INFO | __main__ | Layer 13: accuracy = 0.567
+2026-06-01 00:44:03,918 | INFO | __main__ | Layer 14: accuracy = 0.567
+2026-06-01 00:44:03,942 | INFO | __main__ | Layer 15: accuracy = 0.800
+2026-06-01 00:44:03,972 | INFO | __main__ | Layer 16: accuracy = 0.867
+2026-06-01 00:44:04,001 | INFO | __main__ | Layer 17: accuracy = 0.800
+2026-06-01 00:44:04,062 | INFO | __main__ | Layer 18: accuracy = 0.800
+2026-06-01 00:44:04,094 | INFO | __main__ | Layer 19: accuracy = 0.800
+2026-06-01 00:44:04,120 | INFO | __main__ | Layer 20: accuracy = 0.800
+2026-06-01 00:44:04,146 | INFO | __main__ | Layer 21: accuracy = 0.800
+2026-06-01 00:44:04,172 | INFO | __main__ | Layer 22: accuracy = 0.800
+2026-06-01 00:44:04,196 | INFO | __main__ | Layer 23: accuracy = 0.800
+2026-06-01 00:44:04,222 | INFO | __main__ | Layer 24: accuracy = 0.800
+2026-06-01 00:44:04,248 | INFO | __main__ | Layer 25: accuracy = 0.800
+2026-06-01 00:44:04,275 | INFO | __main__ | Layer 26: accuracy = 0.800
+2026-06-01 00:44:04,300 | INFO | __main__ | Layer 27: accuracy = 0.733
+2026-06-01 00:44:04,323 | INFO | __main__ | Layer 28: accuracy = 0.800
+2026-06-01 00:44:04,323 | INFO | __main__ | Best probe layer: 16 (accuracy=0.867)
+2026-06-01 00:44:04,323 | INFO | __main__ | Steering vector at layer 16:
+2026-06-01 00:44:04,323 | INFO | __main__ | ||Δ|| = 61.8700
+2026-06-01 00:44:04,323 | INFO | __main__ | cosine(μ_secure, μ_insecure) = 0.9441
+2026-06-01 00:44:04,323 | INFO | __main__ | (lower cosine = more separated = better)
+2026-06-01 00:45:25,250 | INFO | __main__ | Writing run logs to act_edit/output/general/act_separation.log
+2026-06-01 00:45:25,251 | INFO | __main__ | Loading model: Qwen/Qwen3-1.7B
+2026-06-01 00:45:38,478 | INFO | __main__ | Model has 28 transformer layers
+2026-06-01 00:45:38,478 | INFO | __main__ | Hidden size: 2048
+2026-06-01 00:45:38,484 | INFO | __main__ | Extracting activations...
+2026-06-01 00:45:47,027 | INFO | __main__ | Activation tensor shape: (16, 29, 2048)
+2026-06-01 00:45:47,028 | INFO | __main__ | Running linear probe: 16 examples, 29 layers, hidden_size=2048
+2026-06-01 00:45:47,165 | INFO | __main__ | Layer  0: accuracy = 0.367
+2026-06-01 00:45:47,194 | INFO | __main__ | Layer  1: accuracy = 0.550
+2026-06-01 00:45:47,223 | INFO | __main__ | Layer  2: accuracy = 0.417
+2026-06-01 00:45:47,255 | INFO | __main__ | Layer  3: accuracy = 0.367
+2026-06-01 00:45:47,288 | INFO | __main__ | Layer  4: accuracy = 0.367
+2026-06-01 00:45:47,321 | INFO | __main__ | Layer  5: accuracy = 0.350
+2026-06-01 00:45:47,353 | INFO | __main__ | Layer  6: accuracy = 0.433
+2026-06-01 00:45:47,384 | INFO | __main__ | Layer  7: accuracy = 0.433
+2026-06-01 00:45:47,415 | INFO | __main__ | Layer  8: accuracy = 0.433
+2026-06-01 00:45:47,446 | INFO | __main__ | Layer  9: accuracy = 0.367
+2026-06-01 00:45:47,478 | INFO | __main__ | Layer 10: accuracy = 0.367
+2026-06-01 00:45:47,508 | INFO | __main__ | Layer 11: accuracy = 0.500
+2026-06-01 00:45:47,539 | INFO | __main__ | Layer 12: accuracy = 0.450
+2026-06-01 00:45:47,569 | INFO | __main__ | Layer 13: accuracy = 0.567
+2026-06-01 00:45:47,597 | INFO | __main__ | Layer 14: accuracy = 0.567
+2026-06-01 00:45:47,620 | INFO | __main__ | Layer 15: accuracy = 0.800
+2026-06-01 00:45:47,650 | INFO | __main__ | Layer 16: accuracy = 0.867
+2026-06-01 00:45:47,678 | INFO | __main__ | Layer 17: accuracy = 0.800
+2026-06-01 00:45:47,706 | INFO | __main__ | Layer 18: accuracy = 0.800
+2026-06-01 00:45:47,734 | INFO | __main__ | Layer 19: accuracy = 0.800
+2026-06-01 00:45:47,762 | INFO | __main__ | Layer 20: accuracy = 0.800
+2026-06-01 00:45:47,787 | INFO | __main__ | Layer 21: accuracy = 0.800
+2026-06-01 00:45:47,811 | INFO | __main__ | Layer 22: accuracy = 0.800
+2026-06-01 00:45:47,836 | INFO | __main__ | Layer 23: accuracy = 0.800
+2026-06-01 00:45:47,861 | INFO | __main__ | Layer 24: accuracy = 0.800
+2026-06-01 00:45:47,887 | INFO | __main__ | Layer 25: accuracy = 0.800
+2026-06-01 00:45:47,913 | INFO | __main__ | Layer 26: accuracy = 0.800
+2026-06-01 00:45:47,939 | INFO | __main__ | Layer 27: accuracy = 0.733
+2026-06-01 00:45:47,963 | INFO | __main__ | Layer 28: accuracy = 0.800
+2026-06-01 00:45:47,963 | INFO | __main__ | Best probe layer: 16 (accuracy=0.867)
+2026-06-01 00:45:47,964 | INFO | __main__ | Steering vector at layer 16:
+2026-06-01 00:45:47,964 | INFO | __main__ | ||Δ|| = 61.8700
+2026-06-01 00:45:47,964 | INFO | __main__ | cosine(μ_secure, μ_insecure) = 0.9441
+2026-06-01 00:45:47,964 | INFO | __main__ | (lower cosine = more separated = better)
+2026-06-01 00:45:48,501 | INFO | __main__ | Probe accuracy plot saved to: probe_general.png
+2026-06-01 00:45:48,622 | INFO | __main__ | Plot saved to: activation_general.png
+2026-06-01 00:45:48,623 | INFO | __main__ | ============================================================
+2026-06-01 00:45:48,623 | INFO | __main__ | SUMMARY
+2026-06-01 00:45:48,623 | INFO | __main__ | ============================================================
+2026-06-01 00:45:48,623 | INFO | __main__ | Chance baseline:      0.500
+2026-06-01 00:45:48,623 | INFO | __main__ | Best probe accuracy:  0.867  (layer 16)
+2026-06-01 00:45:48,623 | INFO | __main__ | Separation exists:    YES
+2026-06-01 00:45:48,623 | INFO | __main__ | Steering vector norm: 61.8700
+2026-06-01 00:45:48,623 | INFO | __main__ | Next step: inject alpha * delta into model activations at
+2026-06-01 00:45:48,623 | INFO | __main__ | layer 16 during generation and measure vulnerability rate change.
+2026-06-01 01:02:33,771 | INFO | __main__ | Writing run logs to act_edit/output/general/act_separation.log
+2026-06-01 01:02:33,771 | INFO | __main__ | Loading model: Qwen/Qwen3-1.7B
+2026-06-01 01:02:45,699 | INFO | __main__ | Model has 28 transformer layers
+2026-06-01 01:02:45,699 | INFO | __main__ | Hidden size: 2048
+2026-06-01 01:02:45,701 | INFO | __main__ | Extracting activations...
+2026-06-01 01:02:53,599 | INFO | __main__ | Activation tensor shape: (16, 29, 2048)
+2026-06-01 01:02:53,600 | INFO | __main__ | Running linear probe: 16 examples, 29 layers, hidden_size=2048
+2026-06-01 01:02:53,696 | INFO | __main__ | Layer  0: accuracy = 0.367
+2026-06-01 01:02:53,724 | INFO | __main__ | Layer  1: accuracy = 0.550
+2026-06-01 01:02:53,752 | INFO | __main__ | Layer  2: accuracy = 0.417
+2026-06-01 01:02:53,783 | INFO | __main__ | Layer  3: accuracy = 0.367
+2026-06-01 01:02:53,814 | INFO | __main__ | Layer  4: accuracy = 0.367
+2026-06-01 01:02:53,845 | INFO | __main__ | Layer  5: accuracy = 0.350
+2026-06-01 01:02:53,876 | INFO | __main__ | Layer  6: accuracy = 0.433
+2026-06-01 01:02:53,908 | INFO | __main__ | Layer  7: accuracy = 0.433
+2026-06-01 01:02:53,937 | INFO | __main__ | Layer  8: accuracy = 0.433
+2026-06-01 01:02:53,966 | INFO | __main__ | Layer  9: accuracy = 0.367
+2026-06-01 01:02:53,997 | INFO | __main__ | Layer 10: accuracy = 0.367
+2026-06-01 01:02:54,025 | INFO | __main__ | Layer 11: accuracy = 0.500
+2026-06-01 01:02:54,055 | INFO | __main__ | Layer 12: accuracy = 0.450
+2026-06-01 01:02:54,084 | INFO | __main__ | Layer 13: accuracy = 0.567
+2026-06-01 01:02:54,110 | INFO | __main__ | Layer 14: accuracy = 0.567
+2026-06-01 01:02:54,134 | INFO | __main__ | Layer 15: accuracy = 0.800
+2026-06-01 01:02:54,163 | INFO | __main__ | Layer 16: accuracy = 0.867
+2026-06-01 01:02:54,190 | INFO | __main__ | Layer 17: accuracy = 0.800
+2026-06-01 01:02:54,219 | INFO | __main__ | Layer 18: accuracy = 0.800
+2026-06-01 01:02:54,247 | INFO | __main__ | Layer 19: accuracy = 0.800
+2026-06-01 01:02:54,273 | INFO | __main__ | Layer 20: accuracy = 0.800
+2026-06-01 01:02:54,298 | INFO | __main__ | Layer 21: accuracy = 0.800
+2026-06-01 01:02:54,323 | INFO | __main__ | Layer 22: accuracy = 0.800
+2026-06-01 01:02:54,347 | INFO | __main__ | Layer 23: accuracy = 0.800
+2026-06-01 01:02:54,373 | INFO | __main__ | Layer 24: accuracy = 0.800
+2026-06-01 01:02:54,399 | INFO | __main__ | Layer 25: accuracy = 0.800
+2026-06-01 01:02:54,424 | INFO | __main__ | Layer 26: accuracy = 0.800
+2026-06-01 01:02:54,451 | INFO | __main__ | Layer 27: accuracy = 0.733
+2026-06-01 01:02:54,473 | INFO | __main__ | Layer 28: accuracy = 0.800
+2026-06-01 01:02:54,473 | INFO | __main__ | Best probe layer: 16 (accuracy=0.867)
+2026-06-01 01:02:54,473 | INFO | __main__ | Steering vector at layer 16:
+2026-06-01 01:02:54,473 | INFO | __main__ | ||Δ|| = 61.8700
+2026-06-01 01:02:54,473 | INFO | __main__ | cosine(μ_secure, μ_insecure) = 0.9441
+2026-06-01 01:02:54,473 | INFO | __main__ | (lower cosine = more separated = better)
+2026-06-01 01:02:54,898 | INFO | __main__ | Probe accuracy plot saved to: probe_general.png
+2026-06-01 01:02:54,998 | INFO | __main__ | Plot saved to: activation_general.png
+2026-06-01 01:02:54,999 | INFO | __main__ | ============================================================
+2026-06-01 01:02:54,999 | INFO | __main__ | SUMMARY
+2026-06-01 01:02:54,999 | INFO | __main__ | ============================================================
+2026-06-01 01:02:54,999 | INFO | __main__ | Chance baseline:      0.500
+2026-06-01 01:02:54,999 | INFO | __main__ | Best probe accuracy:  0.867  (layer 16)
+2026-06-01 01:02:54,999 | INFO | __main__ | Separation exists:    YES
+2026-06-01 01:02:54,999 | INFO | __main__ | Steering vector norm: 61.8700
+2026-06-01 01:02:54,999 | INFO | __main__ | Next step: inject alpha * delta into model activations at
+2026-06-01 01:02:54,999 | INFO | __main__ | layer 16 during generation and measure vulnerability rate change.
+2026-06-01 01:03:59,068 | INFO | __main__ | Writing run logs to act_edit/output/general/act_separation.log
+2026-06-01 01:03:59,068 | INFO | __main__ | Loading model: Qwen/Qwen3-1.7B
+2026-06-01 01:04:06,732 | INFO | __main__ | Model has 28 transformer layers
+2026-06-01 01:04:06,732 | INFO | __main__ | Hidden size: 2048
+2026-06-01 01:04:06,735 | INFO | __main__ | Extracting activations...
+2026-06-01 01:04:14,167 | INFO | __main__ | Activation tensor shape: (16, 29, 2048)
+2026-06-01 01:04:14,168 | INFO | __main__ | Running linear probe: 16 examples, 29 layers, hidden_size=2048
+2026-06-01 01:04:14,249 | INFO | __main__ | Layer  0: accuracy = 0.367
+2026-06-01 01:04:14,278 | INFO | __main__ | Layer  1: accuracy = 0.550
+2026-06-01 01:04:14,306 | INFO | __main__ | Layer  2: accuracy = 0.417
+2026-06-01 01:04:14,337 | INFO | __main__ | Layer  3: accuracy = 0.367
+2026-06-01 01:04:14,370 | INFO | __main__ | Layer  4: accuracy = 0.367
+2026-06-01 01:04:14,401 | INFO | __main__ | Layer  5: accuracy = 0.350
+2026-06-01 01:04:14,432 | INFO | __main__ | Layer  6: accuracy = 0.433
+2026-06-01 01:04:14,462 | INFO | __main__ | Layer  7: accuracy = 0.433
+2026-06-01 01:04:14,492 | INFO | __main__ | Layer  8: accuracy = 0.433
+2026-06-01 01:04:14,521 | INFO | __main__ | Layer  9: accuracy = 0.367
+2026-06-01 01:04:14,552 | INFO | __main__ | Layer 10: accuracy = 0.367
+2026-06-01 01:04:14,579 | INFO | __main__ | Layer 11: accuracy = 0.500
+2026-06-01 01:04:14,704 | INFO | __main__ | Layer 12: accuracy = 0.450
+2026-06-01 01:04:14,745 | INFO | __main__ | Layer 13: accuracy = 0.567
+2026-06-01 01:04:14,771 | INFO | __main__ | Layer 14: accuracy = 0.567
+2026-06-01 01:04:14,793 | INFO | __main__ | Layer 15: accuracy = 0.800
+2026-06-01 01:04:14,822 | INFO | __main__ | Layer 16: accuracy = 0.867
+2026-06-01 01:04:14,849 | INFO | __main__ | Layer 17: accuracy = 0.800
+2026-06-01 01:04:14,875 | INFO | __main__ | Layer 18: accuracy = 0.800
+2026-06-01 01:04:14,902 | INFO | __main__ | Layer 19: accuracy = 0.800
+2026-06-01 01:04:14,927 | INFO | __main__ | Layer 20: accuracy = 0.800
+2026-06-01 01:04:14,951 | INFO | __main__ | Layer 21: accuracy = 0.800
+2026-06-01 01:04:14,975 | INFO | __main__ | Layer 22: accuracy = 0.800
+2026-06-01 01:04:14,998 | INFO | __main__ | Layer 23: accuracy = 0.800
+2026-06-01 01:04:15,023 | INFO | __main__ | Layer 24: accuracy = 0.800
+2026-06-01 01:04:15,047 | INFO | __main__ | Layer 25: accuracy = 0.800
+2026-06-01 01:04:15,072 | INFO | __main__ | Layer 26: accuracy = 0.800
+2026-06-01 01:04:15,096 | INFO | __main__ | Layer 27: accuracy = 0.733
+2026-06-01 01:04:15,118 | INFO | __main__ | Layer 28: accuracy = 0.800
+2026-06-01 01:04:15,118 | INFO | __main__ | Best probe layer: 16 (accuracy=0.867)
+2026-06-01 01:04:15,118 | INFO | __main__ | Steering vector at layer 16:
+2026-06-01 01:04:15,118 | INFO | __main__ | ||Δ|| = 61.8700
+2026-06-01 01:04:15,118 | INFO | __main__ | cosine(μ_secure, μ_insecure) = 0.9441
+2026-06-01 01:04:15,118 | INFO | __main__ | (lower cosine = more separated = better)
+2026-06-01 01:04:15,416 | INFO | __main__ | Probe accuracy plot saved to: probe_general.png
+2026-06-01 01:04:15,517 | INFO | __main__ | Plot saved to: activation_general.png
+2026-06-01 01:04:15,517 | INFO | __main__ | ============================================================
+2026-06-01 01:04:15,517 | INFO | __main__ | SUMMARY
+2026-06-01 01:04:15,517 | INFO | __main__ | ============================================================
+2026-06-01 01:04:15,517 | INFO | __main__ | Chance baseline:      0.500
+2026-06-01 01:04:15,517 | INFO | __main__ | Best probe accuracy:  0.867  (layer 16)
+2026-06-01 01:04:15,517 | INFO | __main__ | Separation exists:    YES
+2026-06-01 01:04:15,517 | INFO | __main__ | Steering vector norm: 61.8700
+2026-06-01 01:04:15,518 | INFO | __main__ | Next step: inject alpha * delta into model activations at
+2026-06-01 01:04:15,518 | INFO | __main__ | layer 16 during generation and measure vulnerability rate change.

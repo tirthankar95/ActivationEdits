@@ -1,0 +1,9 @@
+# Strategy to use when splitting the CVEFixes dataset.
+# Options:
+#   random  - sample 20 % of the full dataset at random
+#   program - split into one file per programming language
+strategy: random
+
+# Integer suffix appended to the output CSV filename (cve_samples_<sample_id>.csv).
+# Only meaningful for the random strategy where each run can produce a distinct sample.
+sample_id: 1

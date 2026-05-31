@@ -23,6 +23,6 @@ data:
     - 'nlohmann::json load_data(const std::string& s) {\n    return nlohmann::json::parse(s);\n}'
 
 output:
-  dir: act_output/diff_code
+  dir: act_edit/output/diff_code
   probe_accuracy_plot: probe_diff_coding.png
   activation_separation_plot: activation_diff_coding.png
