@@ -7,5 +7,7 @@ wheels/
 *.egg-info
 data/CVEFixes/*.csv
 data/CVEFixes/sample/cve_samples_*.csv
+.env
 # Virtual environments
 .venv
+chroma_persistence
