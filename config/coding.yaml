@@ -1,6 +1,8 @@
 model:
   name: Qwen/Qwen3-1.7B
 
+strategy: basic
+
 data:
   secure_examples:
     - 'def get_user(db, user_id):\n    return db.execute("SELECT * FROM users WHERE id = ?", (user_id,))'
@@ -23,6 +25,6 @@ data:
     - 'import pickle\ndef load_data(s):\n    return pickle.loads(s)'
 
 output:
-  dir: act_output/code
+  dir: act_edit/output/code
   probe_accuracy_plot: probe_coding.png
   activation_separation_plot: activation_coding.png

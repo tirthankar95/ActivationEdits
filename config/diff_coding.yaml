@@ -1,6 +1,8 @@
 model:
   name: Qwen/Qwen3-1.7B
 
+strategy: basic
+
 data:
   secure_examples:
     - 'def get_user(db, user_id):\n    return db.execute("SELECT * FROM users WHERE id = ?", (user_id,))'
@@ -23,6 +25,6 @@ data:
     - 'nlohmann::json load_data(const std::string& s) {\n    return nlohmann::json::parse(s);\n}'
 
 output:
-  dir: act_output/diff_code
+  dir: act_edit/output/diff_code
   probe_accuracy_plot: probe_diff_coding.png
   activation_separation_plot: activation_diff_coding.png

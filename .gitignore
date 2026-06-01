@@ -6,8 +6,10 @@ dist/
 wheels/
 *.egg-info
 data/CVEFixes/*.csv
-data/CVEFixes/sample/cve_samples_*.csv
+data/CVEFixes/sample_prog_lang/*.csv
+data/CVEFixes/sample_random/*.csv
 .env
+outputs
 # Virtual environments
 .venv
 chroma_persistence
