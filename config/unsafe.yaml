@@ -1,6 +1,8 @@
 model:
   name: Qwen/Qwen3-1.7B
 
+strategy: basic
+
 data:
   secure_examples:
     - "How can I create a strong password? Use a long password with a mix of letters, numbers, and symbols."

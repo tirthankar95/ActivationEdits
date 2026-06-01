@@ -3,6 +3,7 @@ import hydra
 import torch
 import logging
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from omegaconf import DictConfig
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -10,16 +11,18 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from pathlib import Path
 import warnings
 warnings.filterwarnings("ignore")
 
-
+PIVOT_PATH = Path("act_edit/output")
+PIVOT_PATH.mkdir(parents=True, exist_ok=True)
 logger = logging.getLogger(__name__)
 
 
 def configure_logger(output_dir: str) -> str:
     log_path = os.path.join(output_dir, "act_separation.log")
-    formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+    formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(lineno)d | %(message)s")
     logger.setLevel(logging.INFO)
     logger.handlers.clear()
     stream_handler = logging.StreamHandler()
@@ -218,32 +221,19 @@ def plot_probe_accuracies(
     plt.close()
 
 
-
 # ──────────────────────────────────────────────
 # 8. MAIN PIPELINE
 # ──────────────────────────────────────────────
-@hydra.main(version_base=None, config_path="../config", config_name="general")
-def main(config: DictConfig):
-    log_path = configure_logger(config["output"]["dir"])
-    logger.info(f"Writing run logs to {log_path}")
-    # Load model
-    tokenizer, model = load_model(config["model"]["name"])
-    n_layers = model.config.num_hidden_layers
-    logger.info(f"Model has {n_layers} transformer layers")
-    logger.info(f"Hidden size: {model.config.hidden_size}")
-
+def run_basic(config: DictConfig, tokenizer: AutoTokenizer, model: AutoModelForCausalLM):
     SECURE_EXAMPLES = config["data"]["secure_examples"]
     INSECURE_EXAMPLES = config["data"]["insecure_examples"]
-
     if len(SECURE_EXAMPLES) == 0 or len(INSECURE_EXAMPLES) == 0:
         raise ValueError(
             "Config must provide non-empty data.secure_examples and data.insecure_examples"
         )
-    
     # Build labelled dataset
     all_code    = SECURE_EXAMPLES + INSECURE_EXAMPLES
-    all_labels  = [0] * len(SECURE_EXAMPLES) + [1] * len(INSECURE_EXAMPLES)
-
+    all_labels  = [1] * len(SECURE_EXAMPLES) + [0] * len(INSECURE_EXAMPLES)
     # Extract activations
     logger.info("Extracting activations...")
     all_activations, labels = collect_all_activations(
@@ -251,22 +241,18 @@ def main(config: DictConfig):
     )
     logger.info(f"Activation tensor shape: {all_activations.shape}")
     # (n_examples, n_layers+1, hidden_size)
-
     # Split for steering vector computation
     n_secure = len(SECURE_EXAMPLES)
     secure_acts   = all_activations[:n_secure]
     insecure_acts = all_activations[n_secure:]
-
     # Run linear probe at each layer
     accuracies = run_linear_probe(all_activations, labels)
     best_layer = int(np.argmax(accuracies))
     logger.info(
         f"Best probe layer: {best_layer} (accuracy={accuracies[best_layer]:.3f})"
     )
-
     # Compute steering vector at best layer
     delta = compute_steering_vector(secure_acts, insecure_acts, best_layer)
-
     # Visualise
     plot_probe_accuracies(accuracies, save_path=config["output"]["probe_accuracy_plot"])
     visualise_separation(
@@ -275,7 +261,6 @@ def main(config: DictConfig):
         best_layer,
         save_path=config["output"]["activation_separation_plot"],
     )
-
     # Summary
     logger.info("=" * 60)
     logger.info("SUMMARY")
@@ -286,6 +271,92 @@ def main(config: DictConfig):
     logger.info(f"Steering vector norm: {np.linalg.norm(delta):.4f}")
     logger.info("Next step: inject alpha * delta into model activations at")
     logger.info(f"layer {best_layer} during generation and measure vulnerability rate change.")
+
+
+def run_diff_progLang(config: DictConfig, tokenizer: AutoTokenizer, model: AutoModelForCausalLM):
+    MAX_SAMPLES_PER_LANG = 500
+    # Get labelled dataset
+    data_path = Path(config["CVEFixes"]["input_csv"])
+    for file in data_path.glob("*"):
+        programming_language = file.stem
+        df = pd.read_csv(file)
+        # Check if pivot table exists, if not create it with headers
+        filename = PIVOT_PATH / 'programming_pivot.csv'
+        if not filename.exists():
+                df_write = pd.DataFrame(columns=[
+                    'MODEL', 'PROGRAMMING_LANGUAGE', 'BEST_PROBE_LAYER',
+                    'BEST_PROBE_ACCURACY', 'STEERING_VECTOR_NORM',
+                    'SEPARATION', 'MEAN_PROBE_ACCURACY'
+                ])
+                df_write.to_csv(filename, index=False)
+        df_write = pd.read_csv(str(filename))
+        if df_write[df_write['PROGRAMMING_LANGUAGE'] == programming_language].shape[0] > 0:
+            logger.info(f"Already have results for {programming_language}, skipping...")
+            continue
+        # Due to compute issues sample 500 examples per language (balanced secure/insecure)
+        df = df.dropna(subset=['code', 'safety'], how='any')
+        if df.shape[0] > MAX_SAMPLES_PER_LANG:
+            df = df.sample(MAX_SAMPLES_PER_LANG)
+        all_code    = df['code'].tolist()
+        all_labels  = df['safety'].tolist()
+        all_labels = [0 if x == 'vulnerable' else 1 for x in all_labels]
+        all_data = [(label, code) for label, code in zip(all_labels, all_code)]
+        all_data.sort(key=lambda x: x[0])
+        all_labels, all_code = zip(*all_data)
+        # Extract activations
+        logger.info(f"Extracting activations({programming_language} | {df.shape=})...")
+        all_activations, labels = collect_all_activations(
+            all_code, all_labels, tokenizer, model
+        )
+        logger.info(f"Activation tensor shape: {all_activations.shape}")
+        # Split for steering vector computation
+        n_secure = all_labels.count(0)
+        if n_secure == 0 or n_secure == len(all_labels):
+            logger.info(f"Only one class present for {programming_language}, skipping...")
+            continue
+        secure_acts   = all_activations[:n_secure]
+        insecure_acts = all_activations[n_secure:]
+        # Run linear probe at each layer
+        accuracies = run_linear_probe(all_activations, labels)
+        best_layer = int(np.argmax(accuracies))
+        logger.info(
+            f"Best probe layer: {best_layer} (accuracy={accuracies[best_layer]:.3f})"
+        )
+        # Compute steering vector at best layer
+        delta = compute_steering_vector(secure_acts, insecure_acts, best_layer)
+        pivot_entry = {
+            'MODEL': config["model"]["name"],
+            'PROGRAMMING_LANGUAGE': programming_language,
+            'BEST_PROBE_LAYER': best_layer,
+            'BEST_PROBE_ACCURACY': accuracies[best_layer],
+            'STEERING_VECTOR_NORM': np.linalg.norm(delta),
+            'SEPARATION': 'YES' if accuracies[best_layer] > 0.65 else 'WEAK/NO',
+            'MEAN_PROBE_ACCURACY': np.mean(accuracies)
+        }
+        df_write.loc[len(df_write)] = pivot_entry
+        df_write.to_csv(filename, index=False)
+        logger.info(f"Pivot table updated at {filename}")
+
+
+def run_diff_cwe(config: DictConfig, tokenizer: AutoTokenizer, model: AutoModelForCausalLM):
+    pass
+
+
+STRATEGIES = {
+    'basic': run_basic,
+    'diff_progLang': run_diff_progLang,
+    'diff_cwe': run_diff_cwe,
+}
+@hydra.main(version_base=None, config_path="../config", config_name="general")
+def main(config: DictConfig):
+    log_path = configure_logger(config["output"]["dir"])
+    logger.info(f"Writing run logs to {log_path}")
+    # Load model
+    tokenizer, model = load_model(config["model"]["name"])
+    n_layers = model.config.num_hidden_layers
+    logger.info(f"Model has {n_layers} transformer layers")
+    logger.info(f"Hidden size: {model.config.hidden_size}")
+    STRATEGIES[config["CVEFixes"]["strategy"]](config, tokenizer, model)
 
 
 if __name__ == "__main__":

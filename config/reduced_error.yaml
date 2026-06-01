@@ -1,6 +1,8 @@
 model:
   name: Qwen/Qwen3-1.7B
 
+strategy: basic
+
 data:
   secure_examples:
     - 'import os\ndef read_file(filename):\n    safe = os.path.basename(filename)\n    with open(os.path.join("/data", safe)) as f:\n        return f.read()'
