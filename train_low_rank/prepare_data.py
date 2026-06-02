@@ -58,7 +58,6 @@ class DatasetPreparer:
             if not file_ds:
                 raise ValueError(f"No CSV files found in {DATA_DIR}")
             file_ds.set_format(type="torch")
-            
             # Save the processed dataset and load it back from DATA_SAVE.
             DATA_SAVE.parent.mkdir(parents=True, exist_ok=True)
             file_ds.save_to_disk(str(DATA_SAVE / f"sample_{indx}"))
@@ -66,13 +65,21 @@ class DatasetPreparer:
         logger.info(f"Finished preparing training datasets. Datasets saved to {DATA_SAVE}.")
 
 
-    def load_train_dataset(self):
+    def load_train_dataset(self, chunk_size: int = 10):
+        if chunk_size <= 0:
+            raise ValueError("chunk_size must be a positive integer")
         for ds_file in DATA_SAVE.glob("sample_*"):
-            if ds_file.is_file():
+            if ds_file.is_dir():
                 logger.info(f"Loading dataset from {ds_file}")
                 ds = load_from_disk(str(ds_file))
                 ds.set_format(type="torch")
-                yield ds
+                dataset_len = len(ds)
+                for start in range(0, dataset_len, chunk_size):
+                    end = min(start + chunk_size, dataset_len)
+                    logger.info(
+                        f"Yielding chunk [{start}:{end}] from {ds_file.name}"
+                    )
+                    yield ds.select(range(start, end))
             else:
                 logger.warning(f"Error loading file: {ds_file}")
 

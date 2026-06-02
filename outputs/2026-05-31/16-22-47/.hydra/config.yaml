@@ -1,0 +1,11 @@
+train: true
+model:
+  name: /home/tmittra/models/Qwen3-1.7B
+output:
+  dir: ./lora_output
+training:
+  num_train_epochs: 32
+  per_device_train_batch_size: 4
+inference:
+  use_adapter: true
+  adapter_dir: ./lora_output/adapter

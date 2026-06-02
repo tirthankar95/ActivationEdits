@@ -11,3 +11,5 @@ data/CVEFixes/sample/cve_samples_*.csv
 # Virtual environments
 .venv
 chroma_persistence
+ll.gg
+lora_output

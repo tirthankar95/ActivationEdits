@@ -29,7 +29,8 @@ def fine_tune_lora(
     base_model_name,
     output_adapter_dir="lora_adapter",
     num_train_epochs=64,
-    per_device_train_batch_size=4
+    per_device_train_batch_size=4,
+    train_dataset_chunk_size=10,
 ):
     '''
     per_device_train_batch_size a.k.a batch_size. Device = GPU
@@ -39,6 +40,7 @@ def fine_tune_lora(
     tokenizer = AutoTokenizer.from_pretrained(base_model_name)
     model = AutoModelForCausalLM.from_pretrained(base_model_name)
     dataset_preparer = DatasetPreparer()
+    
     dataset_preparer.make_train_dataset(tokenizer)
     # LoRA config
     lora_config = LoraConfig(
@@ -76,7 +78,7 @@ def fine_tune_lora(
         fp16=torch.cuda.is_available(),
         report_to="none"
     )
-    for train_dataset in dataset_preparer.load_train_dataset():
+    for train_dataset in dataset_preparer.load_train_dataset(chunk_size=train_dataset_chunk_size):
         trainer = Trainer(
             model=peft_model,
             args=training_args,
@@ -136,7 +138,7 @@ def main(cfg: DictConfig):
             output_adapter_dir=cfg.output.dir,
             num_train_epochs=cfg.training.num_train_epochs,
             per_device_train_batch_size=cfg.training.per_device_train_batch_size,
-            merge_and_save=cfg.output.merge_and_save,
+            train_dataset_chunk_size=cfg.training.train_dataset_chunk_size,
         )
     elif cfg.inference.use_adapter:
             adapter_dir = Path(cfg.inference.adapter_dir)
