@@ -53,7 +53,7 @@ Run:
 uv run python activation_edit.py
 ```
 
-Outputs are written under the configured output directory (for example, in act_output/reduced_error):
+Outputs are written under the configured output directory (for example, in act_edit/output/reduced_error):
 
 1. Probe accuracy plot by layer.
 2. Activation separation visualization.
